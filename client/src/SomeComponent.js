@@ -7,7 +7,7 @@ export default SomeComponent = () => {
   // This is what we want the component to return.
   return (
     <Text style={styles.text}> {/* Here I am using the styles StyleSheet to change the text's color. */}
-      This is a component!!!!.
+      This is a component.
       I can display data, {number}, using curly brackets!
     </Text>
   )
