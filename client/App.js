@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 // Import your HomeScreen component
-import HomeScreen from './src/HomeScreen';
+//import HomeScreen from './src/HomeScreen';
+import HomeScreenMVP from './src/HomeScreenMVP';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ const App = () => {
       >
         <Stack.Screen
           name="Shroomies"
-          component={HomeScreen}
+          component={HomeScreenMVP}
           options={{
             headerShown: false,
           }}
