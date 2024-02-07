@@ -11,7 +11,7 @@ const HomeScreen = () => {
       <View style={styles.searchBarContainer}>
         <View style={styles.iconContainer}>
           <Image
-            source={require('/Users/aarfanhussain/Shroomies/shroomies/client/assets/mglass2.png')}
+            source={require('../assets/mglass2.png')}
             style={styles.icon}
           />
         </View>
@@ -20,7 +20,7 @@ const HomeScreen = () => {
   placeholder="Search..."
   value={searchText}
   onChangeText={(text) => setSearchText(text)}
-  onFocus={() => setSearchText('')} 
+  onFocus={() => setSearchText('')}
 />
         <Text style={styles.searchText}>Search</Text>
       </View>
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center', 
-    backgroundColor: '#772F1A', 
+    justifyContent: 'center',
+    backgroundColor: '#772F1A',
     borderRadius: 40,
     marginTop: 10,
     paddingLeft: 16,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     color: '#772F1A',
   },
   searchText: {
-    color: '#FFF', 
+    color: '#FFF',
     paddingHorizontal: 16,
     fontWeight: 'bold',
     fontSize: 18,
