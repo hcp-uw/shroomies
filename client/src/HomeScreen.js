@@ -16,12 +16,12 @@ const HomeScreen = () => {
           />
         </View>
         <TextInput
-  style={styles.searchBar}
-  placeholder="Search..."
-  value={searchText}
-  onChangeText={(text) => setSearchText(text)}
-  onFocus={() => setSearchText('')}
-/>
+          style={styles.searchBar}
+          placeholder="Search..."
+          value={searchText}
+          onChangeText={(text) => setSearchText(text)}
+          onFocus={() => setSearchText('')}
+        />
         <Text style={styles.searchText}>Search</Text>
       </View>
       {/* Add your additional UI components and logic here */}
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     alignItems: 'center',
-    color: '#772F1A',
+    color: '#FFF',
   },
   searchText: {
     color: '#FFF',
