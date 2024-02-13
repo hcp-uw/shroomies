@@ -1,8 +1,28 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 const HomeScreenMVP = () => {
   const [searchText, setSearchText] = useState('');
+
+  const launchCamera = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    launchCamera(options, response => {
+      console.log('Response = ', response);
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else {
+        console.log('response', JSON.stringify(response));
+        this.setState({
+          fileUri: response.assets[0].uri,
+        });
+      }
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -28,7 +48,25 @@ const HomeScreenMVP = () => {
         />
         <Text style={styles.searchText}>Search</Text>
       </View>
-      {/* Add your additional UI components and logic here */}
+      
+      <View style={styles.searchBarContainer}>
+        <TextInput
+          style={styles.searchBar}
+          placeholder="Search..."
+          value={searchText}
+          onChangeText={(text) => setSearchText(text)}
+          onFocus={() => setSearchText('')}
+        />
+        <Text style={styles.searchText}>Search</Text>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={this.launchCamera}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Scan Mushroom</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -94,6 +132,28 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     marginLeft: 30,
+  },
+  buttonContainer: {
+    width: 150,
+    height: 150,
+    marginLeft: -20,
+  },
+  button: {
+    width: 225,
+    height: 50,
+    backgroundColor: '#DCDCDC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 3,
+    marginBottom: 10,
+  },
+  buttonText: {
+    fontSize: 18,
+    textAlign: 'left',
+    marginTop: 10,
+    marginBottom: 16,
+    color: '#46583D',
+    fontWeight: 'bold',
   },
 });
 
