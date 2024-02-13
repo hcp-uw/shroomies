@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 const HomeScreenMVP = () => {
   const [searchText, setSearchText] = useState('');
