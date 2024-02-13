@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
 
 const HomeScreenMVP = () => {
   const [searchText, setSearchText] = useState('');
@@ -25,30 +25,34 @@ const HomeScreenMVP = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Fungi Find</Text>
-      <Text style={styles.subtitle}>Scan your mushroom to identify!</Text>
-      <View style={styles.horizIconContainer}>
-        <Image
-          source={require('../assets/camera-fungifind 1.png')}
-          style={styles.rotatedIcon15}
-        />
-        <Image
-          source={require('../assets/shroomies vector icon 1.png')}
-          style={styles.icon}
-        />
-      </View>
-      <View style={styles.searchBarContainer}>
-        <TextInput
-          style={styles.searchBar}
-          placeholder="Search..."
-          value={searchText}
-          onChangeText={(text) => setSearchText(text)}
-          onFocus={() => setSearchText('')}
-        />
-        <Text style={styles.searchText}>Search</Text>
-      </View>
-      
+    <LinearGradient
+      colors={['#EE9E62', '#576F3D']}
+      style={styles.gradient}
+    >
+      <View style={styles.container}>
+        <Text style={styles.title}>Fungi Find</Text>
+        <Text style={styles.subtitle}>Scan your mushroom to identify!</Text>
+        <View style={styles.horizIconContainer}>
+          <Image
+            source={require('../assets/camera-fungifind 1.png')}
+            style={styles.rotatedIcon15}
+          />
+          <Image
+            source={require('../assets/shroomies vector icon 1.png')}
+            style={styles.icon}
+          />
+        </View>
+        <View style={styles.searchBarContainer}>
+          <TextInput
+            style={styles.searchBar}
+            placeholder="Search..."
+            value={searchText}
+            onChangeText={(text) => setSearchText(text)}
+            onFocus={() => setSearchText('')}
+          />
+          <Text style={styles.searchText}>Search</Text>
+        </View>
+        
       <View style={styles.searchBarContainer}>
         <TextInput
           style={styles.searchBar}
@@ -67,31 +71,36 @@ const HomeScreenMVP = () => {
           <Text style={styles.buttonText}>Scan Mushroom</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     padding: 16,
     justifyContent: 'flex-start',
     marginTop: 50,
-    backgroundColor: '#FFF2E9',
   },
   title: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#772F1A',
+    fontFamily: "Lato",
   },
   subtitle: {
-    fontSize: 24,
+    fontSize: 22,
     textAlign: 'left',
     marginTop: 10,
     marginBottom: 16,
     color: '#46583D',
     fontWeight: 'bold',
+    fontFamily: "Lato",
   },
   searchBarContainer: {
     flexDirection: 'row',
