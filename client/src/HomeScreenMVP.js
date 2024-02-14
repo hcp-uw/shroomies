@@ -65,23 +65,24 @@ const HomeScreenMVP = () => {
                 style={styles.icon}
               />
             </View>
-
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                onPress={uploadImage}
-                style={styles.button}>
-                <Text style={styles.buttonText}>Scan Mushroom</Text>
-              </TouchableOpacity>
-            </View>
           </View>
 
           <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                onPress={selectImage}
-                style={styles.button}>
-                <Text style={styles.buttonText}>Select Image</Text>
-              </TouchableOpacity>
+            <TouchableOpacity
+              onPress={uploadImage}
+              style={styles.button}>
+              <Text style={styles.buttonText}>Scan Mushroom</Text>
+            </TouchableOpacity>
           </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={selectImage}
+              style={styles.button}>
+              <Text style={styles.buttonText}>Select Image</Text>
+            </TouchableOpacity>
+          </View>
+
         </LinearGradient>
       </SafeAreaView>
     </Fragment>
@@ -140,6 +141,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 40,
   },
   button: {
     flex: 1,
