@@ -25,6 +25,24 @@ const HomeScreenMVP = () => {
     }
   }
 
+  const selectImage = async () => {
+    try {
+      await ImagePicker.requestCameraPermissionsAsync();
+      let result = await ImagePicker.launchImageLibraryAsync({
+        cameraType: ImagePicker.CameraType.back,
+        allowsEditing: true,
+        spect: [1, 1],
+        quality: 1
+      });
+
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      alert("Error uploading image: " + error);
+    }
+  }
+
   return (
     <Fragment>
       <SafeAreaView style={{ flex: 0, backgroundColor: '#EE9E62' }}/>
@@ -55,6 +73,14 @@ const HomeScreenMVP = () => {
                 <Text style={styles.buttonText}>Scan Mushroom</Text>
               </TouchableOpacity>
             </View>
+          </View>
+
+          <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={selectImage}
+                style={styles.button}>
+                <Text style={styles.buttonText}>Select Image</Text>
+              </TouchableOpacity>
           </View>
         </LinearGradient>
       </SafeAreaView>
@@ -111,6 +137,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width: 150,
