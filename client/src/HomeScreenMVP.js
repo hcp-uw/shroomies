@@ -21,7 +21,7 @@ const HomeScreenMVP = () => {
         setImage(result.assets[0].uri);
       }
     } catch (error) {
-      alert("Error uploading image");
+      alert("Error uploading image: " + error);
     }
   }
 
