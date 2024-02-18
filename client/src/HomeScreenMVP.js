@@ -52,7 +52,13 @@ const HomeScreenMVP = () => {
           style={styles.gradient}
         >
           <View style={styles.container}>
-            <Text style={styles.title}>Fungi Find</Text>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Fungi Find</Text>
+              <Image
+                source={require('../assets/aboutus-icon.png')}
+                style={styles.about}
+              />
+            </View>
             <Text style={styles.subtitle}>Scan your mushroom to identify!</Text>
             <View style={styles.horizIconContainer}>
               <Image
@@ -99,12 +105,20 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 30,
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#772F1A',
     fontFamily: "Lato",
+  },
+  about: {
+    width: 25,
+    height: 25,
   },
   subtitle: {
     fontSize: 22,
@@ -147,18 +161,19 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 225,
     height: 50,
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#585123',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 3,
+    borderRadius: 15,
     marginBottom: 10,
+    marginHorizontal: 50,
   },
   buttonText: {
     fontSize: 18,
     textAlign: 'left',
     marginTop: 10,
     marginBottom: 16,
-    color: '#46583D',
+    color: '#ffff',
     fontWeight: 'bold',
   },
 });
