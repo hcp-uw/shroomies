@@ -76,8 +76,12 @@ const HomeScreenMVP = () => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               onPress={uploadImage}
-              style={styles.button}>
+              style={styles.button1}>
               <Text style={styles.buttonText}>Scan Mushroom</Text>
+              <Image
+                source={require('../assets/camera.png')}
+                style={styles.camera}
+              />
             </TouchableOpacity>
           </View>
 
@@ -104,6 +108,7 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: 'flex-start',
     marginTop: 30,
+    marginBottom: 140,
   },
   titleContainer: {
     flexDirection: 'row',
@@ -155,12 +160,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
+    // marginTop: 40,
+    // backgroundColor: 'black',
   },
   button: {
     flex: 1,
     width: 225,
     height: 50,
+    backgroundColor: '#585123',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    marginBottom: 10,
+    marginHorizontal: 50,
+  },
+  button1: {
+    flex: 1,
+    width: 225,
+    height: 150,
     backgroundColor: '#585123',
     justifyContent: 'center',
     alignItems: 'center',
@@ -176,6 +193,10 @@ const styles = StyleSheet.create({
     color: '#ffff',
     fontWeight: 'bold',
   },
+  camera: {
+    width: 60,
+    height: 50
+  }
 });
 
 export default HomeScreenMVP;
