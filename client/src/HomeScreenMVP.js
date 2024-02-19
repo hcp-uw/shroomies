@@ -2,8 +2,9 @@ import React, { useState, Component, Fragment } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as ImagePicker from 'expo-image-picker';
+//hi
 
-const HomeScreenMVP = () => {
+const HomeScreenMVP = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [image, setImage] = useState(null);
 
@@ -54,10 +55,13 @@ const HomeScreenMVP = () => {
           <View style={styles.container}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Fungi Find</Text>
+              <TouchableOpacity
+              onPress={() => navigation.navigate('AboutPage')}>
               <Image
                 source={require('../assets/aboutus-icon.png')}
                 style={styles.about}
               />
+            </TouchableOpacity>
             </View>
             <Text style={styles.subtitle}>Scan your mushroom to identify!</Text>
             <View style={styles.horizIconContainer}>
