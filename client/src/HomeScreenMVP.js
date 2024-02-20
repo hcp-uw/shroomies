@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
-    marginBottom: 10,
-    marginHorizontal: 50,
+    marginBottom: 70,
+    marginHorizontal: 30,
   },
   button1: {
     flex: 1,
@@ -186,8 +186,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
-    marginBottom: 10,
-    marginHorizontal: 50,
+    marginHorizontal: 30,
   },
   buttonText: {
     fontSize: 18,
