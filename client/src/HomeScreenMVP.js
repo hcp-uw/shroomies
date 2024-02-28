@@ -48,9 +48,17 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   const sendImage = async (imageURI) => {
-    await fetch(serverURL, {method: "POST", body: JSON.stringify(imageURI)})
-      .then((result) => console.log(JSON.stringify(result)))
+    await fetch(serverURL, {method: "POST", body: {image: JSON.stringify(imageURI)}})
+      .then((result) => doImageResponse(result))
       .catch((result) => {console.log("could not connect to server");});
+  }
+
+  const doImageResponse = (res) => {
+    if (res.status !== 200) {
+      console.log(res);
+      return;
+    }
+    console.log(JSON.stringify(res));
   }
 
   return (
