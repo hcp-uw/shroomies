@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 /** GET endpoint for sending back a Hello World message */
-app.get('/identify', (req, res) => {
+app.post('/identify', (req, res) => {
   //res.type('text');
   const imgURI = req.body.img;
   res.send({response: "haha this isn't implemented yet"});
