@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 const HomeScreenMVP = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [image, setImage] = useState(null);
-  const serverURL = "../server/identify";
+  const serverURL = "http://localhost:4000/identify";
 
   const uploadImage = async () => {
     try {
@@ -48,7 +48,7 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   const sendImage = async (imageURI) => {
-    fetch(serverURL, {method: "POST", body: JSON.stringify(imageURI)})
+    await fetch(serverURL, {method: "POST", body: JSON.stringify(imageURI)})
       .then((result) => console.log(JSON.stringify(result)))
       .catch((result) => {console.log("could not connect to server");});
   }

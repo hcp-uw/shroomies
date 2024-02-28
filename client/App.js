@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { StaticServer } from 'react-native-static-server';
-require('../src/app.js');
+// require('../src/app.js');
 
 // Import your HomeScreen component
 //import HomeScreen from './src/HomeScreen';
