@@ -58,7 +58,8 @@ const HomeScreenMVP = ({navigation}) => {
       console.log(res);
       return;
     }
-    console.log(JSON.stringify(res));
+    //console.log(JSON.stringify(res));
+    console.log(res.response);
   }
 
   return (

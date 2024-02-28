@@ -9,7 +9,7 @@ app.use(cors());
 app.post('/identify', (req, res) => {
   //res.type('text');
   //const imgURI = req.body.image;
-  res.send({body: {response: "haha this isn't implemented yetttt"}});
+  res.send(res.json({response: "haha this isn't implemented yetttt"}));
 });
 
 // Tells our app to listen to the given port
