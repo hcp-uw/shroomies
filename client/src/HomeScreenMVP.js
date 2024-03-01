@@ -63,68 +63,58 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   return (
-    <Fragment>
-      <SafeAreaView style={{ flex: 0, backgroundColor: '#EE9E62' }}/>
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#576F3D' }}>
-        <LinearGradient
-          colors={['#EE9E62', '#576F3D']}
-          style={styles.gradient}
-        >
-          <View style={styles.container}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>Fungi Find</Text>
-              <TouchableOpacity
-              onPress={() => navigation.navigate('AboutPage')}>
-              <Image
-                source={require('../assets/aboutus-icon.png')}
-                style={styles.about}
-              />
-            </TouchableOpacity>
-            </View>
-            <Text style={styles.subtitle}>Scan your mushroom to identify!</Text>
-            <View style={styles.horizIconContainer}>
-              <Image
-                source={require('../assets/camera-fungifind.png')}
-                style={styles.rotatedIcon15}
-                resizeMode="contain"
-              />
-              <Image
-                source={require('../assets/shroomies_icon.png')}
-                style={styles.icon}
-              />
-            </View>
-          </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Fungi Find</Text>
+          <TouchableOpacity
+          onPress={() => navigation.navigate('AboutPage')}>
+          <Image
+            source={require('../assets/aboutus-icon.png')}
+            style={styles.about}
+          />
+        </TouchableOpacity>
+        </View>
+        <View style={styles.hr} />
+        <Text style={styles.subtitle}>Is my mushroom poisonous?</Text>
+        <Text style={styles.subtitle}>Scan it now to find out!</Text>
+        <View style={styles.horizIconContainer}>
+          <Image
+            source={require('../assets/camera-fungifind.png')}
+            style={styles.rotatedIcon15}
+            resizeMode="contain"
+          />
+          <Image
+            source={require('../assets/shroomies_icon.png')}
+            style={styles.icon}
+          />
+        </View>
+      </View>
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={uploadImage}
-              style={styles.button1}>
-              <Text style={styles.buttonText}>Scan Mushroom</Text>
-              <Image
-                source={require('../assets/camera.png')}
-                style={styles.camera}
-              />
-            </TouchableOpacity>
-          </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={uploadImage}
+          style={styles.button1}>
+          <Text style={styles.buttonText}>Scan Mushroom</Text>
+          <Image
+            source={require('../assets/camera.png')}
+            style={styles.camera}
+          />
+        </TouchableOpacity>
+      </View>
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={selectImage}
-              style={styles.button}>
-              <Text style={styles.buttonText}>Select Image</Text>
-            </TouchableOpacity>
-          </View>
-
-        </LinearGradient>
-      </SafeAreaView>
-    </Fragment>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={selectImage}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Select Image</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
   container: {
     flex: 1,
     padding: 16,
@@ -137,23 +127,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 33,
+    lineHeight: 40,
     textAlign: 'left',
     color: '#772F1A',
     fontFamily: "Lato",
+  },
+  hr: {
+    borderBottomColor: "black",
+    borderBottomWidth: 0.5,
+    marginLeft: -16,
+    marginRight: -16,
+    marginBottom: 10
   },
   about: {
     width: 25,
     height: 25,
   },
   subtitle: {
-    fontSize: 22,
+    fontSize: 21,
+    lineHeight: 26,
     textAlign: 'left',
-    marginTop: 10,
-    marginBottom: 16,
-    color: '#46583D',
-    fontWeight: 'bold',
+    color: '#772F1A',
     fontFamily: "Lato",
   },
   iconContainer: {
@@ -162,7 +157,6 @@ const styles = StyleSheet.create({
   horizIconContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 40,
   },
   icon: {
     width: 150,
