@@ -163,12 +163,12 @@ const styles = StyleSheet.create({
     height: 150,
     marginLeft: -40,
     marginRight: 40,
-    marginTop: 10,
+    marginTop: 8,
   },
   rotatedIcon15: {
     transform: [{ rotate: '13.38deg'}],
-    width: 260,
-    height: 200,
+    width: 240,
+    height: 190,
     marginLeft: 20,
   },
   buttonContainer: {
