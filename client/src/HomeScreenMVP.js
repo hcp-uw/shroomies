@@ -67,13 +67,6 @@ const HomeScreenMVP = ({navigation}) => {
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Fungi Find</Text>
-          <TouchableOpacity
-          onPress={() => navigation.navigate('AboutPage')}>
-          <Image
-            source={require('../assets/aboutus-icon.png')}
-            style={styles.about}
-          />
-        </TouchableOpacity>
         </View>
         <View style={styles.hr} />
         <Text style={styles.subtitle}>Is my mushroom poisonous?</Text>
@@ -101,15 +94,27 @@ const HomeScreenMVP = ({navigation}) => {
             style={styles.camera}
           />
         </TouchableOpacity>
-      </View>
 
-      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={selectImage}
           style={styles.button}>
           <Text style={styles.buttonText}>Select Image</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('AboutPage')}
+          style={styles.aboutButton}>
+          <Text style={styles.aboutButtonText}>About Us</Text>
+        </TouchableOpacity>
       </View>
+
+      {/* <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={selectImage}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Select Image</Text>
+        </TouchableOpacity>
+      </View> */}
     </SafeAreaView>
   );
 }
@@ -172,40 +177,56 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
+    flex: 3,
+    flexDirection: 'col',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 40,
     // backgroundColor: 'black',
+    gap: 6,
   },
   button: {
-    flex: 1,
-    width: 225,
-    height: 50,
-    backgroundColor: '#585123',
+    width: 330,
+    height: 60,
+    backgroundColor: '#B55710',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
-    marginBottom: 70,
     marginHorizontal: 30,
+    borderColor: '#585123',
+    borderWidth: 5,
   },
   button1: {
-    flex: 1,
-    width: 225,
-    height: 150,
-    backgroundColor: '#585123',
+    width: 330,
+    height: 190,
+    backgroundColor: '#B55710',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
     marginHorizontal: 30,
+    borderColor: '#585123',
+    borderWidth: 5,
+    gap: 5,
+  },
+  aboutButton: {
+    width: 330,
+    height: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    borderColor: '#585123',
+    borderWidth: 5,
+    marginTop: 15,
   },
   buttonText: {
     fontSize: 18,
     textAlign: 'left',
-    marginTop: 10,
-    marginBottom: 16,
     color: '#ffff',
+    fontWeight: 'bold',
+  },
+  aboutButtonText: {
+    fontSize: 18,
+    textAlign: 'left',
+    color: '#585123',
     fontWeight: 'bold',
   },
   camera: {
