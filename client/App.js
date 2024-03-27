@@ -1,7 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { StaticServer } from 'react-native-static-server';
+// require('../src/app.js');
 
 // Import your HomeScreen component
 //import HomeScreen from './src/HomeScreen';
@@ -11,6 +13,7 @@ import AboutPageMVP from './src/AboutPageMVP';
 const Stack = createStackNavigator();
 
 const App = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator

@@ -7,6 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 const HomeScreenMVP = ({navigation}) => {
   const [searchText, setSearchText] = useState('');
   const [image, setImage] = useState(null);
+  const serverURL = "http://localhost:4000/identify";
 
   const uploadImage = async () => {
     try {
@@ -20,6 +21,7 @@ const HomeScreenMVP = ({navigation}) => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
+        sendImage(image);
       }
     } catch (error) {
       alert("Error uploading image: " + error);
@@ -38,75 +40,86 @@ const HomeScreenMVP = ({navigation}) => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
+        sendImage(image);
       }
     } catch (error) {
       alert("Error uploading image: " + error);
     }
   }
 
+  const sendImage = async (imageURI) => {
+    await fetch(serverURL, {method: "POST", body: {image: JSON.stringify(imageURI)}})
+      .then((result) => doImageResponse(result))
+      .catch((result) => {console.log("could not connect to server");});
+  }
+
+  const doImageResponse = (res) => {
+    if (res.status !== 200) {
+      console.log(res);
+      return;
+    }
+    //console.log(JSON.stringify(res));
+    console.log(res.response);
+  }
+
   return (
-    <Fragment>
-      <SafeAreaView style={{ flex: 0, backgroundColor: '#EE9E62' }}/>
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#576F3D' }}>
-        <LinearGradient
-          colors={['#EE9E62', '#576F3D']}
-          style={styles.gradient}
-        >
-          <View style={styles.container}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>Fungi Find</Text>
-              <TouchableOpacity
-              onPress={() => navigation.navigate('AboutPage')}>
-              <Image
-                source={require('../assets/aboutus-icon.png')}
-                style={styles.about}
-              />
-            </TouchableOpacity>
-            </View>
-            <Text style={styles.subtitle}>Scan your mushroom to identify!</Text>
-            <View style={styles.horizIconContainer}>
-              <Image
-                source={require('../assets/camera-fungifind.png')}
-                style={styles.rotatedIcon15}
-                resizeMode="contain"
-              />
-              <Image
-                source={require('../assets/shroomies_icon.png')}
-                style={styles.icon}
-              />
-            </View>
-          </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Fungi Find</Text>
+        </View>
+        <View style={styles.hr} />
+        <Text style={styles.subtitle}>Is my mushroom poisonous?</Text>
+        <Text style={styles.subtitle}>Scan it now to find out!</Text>
+        <View style={styles.horizIconContainer}>
+          <Image
+            source={require('../assets/camera-fungifind.png')}
+            style={styles.rotatedIcon15}
+            resizeMode="contain"
+          />
+          <Image
+            source={require('../assets/shroomies_icon.png')}
+            style={styles.icon}
+          />
+        </View>
+      </View>
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={uploadImage}
-              style={styles.button1}>
-              <Text style={styles.buttonText}>Scan Mushroom</Text>
-              <Image
-                source={require('../assets/camera.png')}
-                style={styles.camera}
-              />
-            </TouchableOpacity>
-          </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={uploadImage}
+          style={styles.button1}>
+          <Text style={styles.buttonText}>Scan Mushroom</Text>
+          <Image
+            source={require('../assets/camera.png')}
+            style={styles.camera}
+          />
+        </TouchableOpacity>
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={selectImage}
-              style={styles.button}>
-              <Text style={styles.buttonText}>Select Image</Text>
-            </TouchableOpacity>
-          </View>
+        <TouchableOpacity
+          onPress={selectImage}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Select Image</Text>
+        </TouchableOpacity>
 
-        </LinearGradient>
-      </SafeAreaView>
-    </Fragment>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('AboutPage')}
+          style={styles.aboutButton}>
+          <Text style={styles.aboutButtonText}>About Us</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={selectImage}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Select Image</Text>
+        </TouchableOpacity>
+      </View> */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
   container: {
     flex: 1,
     padding: 16,
@@ -119,23 +132,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 33,
+    lineHeight: 40,
     textAlign: 'left',
     color: '#772F1A',
     fontFamily: "Lato",
+  },
+  hr: {
+    borderBottomColor: "black",
+    borderBottomWidth: 0.5,
+    marginLeft: -16,
+    marginRight: -16,
+    marginBottom: 10
   },
   about: {
     width: 25,
     height: 25,
   },
   subtitle: {
-    fontSize: 22,
+    fontSize: 21,
+    lineHeight: 26,
     textAlign: 'left',
-    marginTop: 10,
-    marginBottom: 16,
-    color: '#46583D',
-    fontWeight: 'bold',
+    color: '#772F1A',
     fontFamily: "Lato",
   },
   iconContainer: {
@@ -144,56 +162,71 @@ const styles = StyleSheet.create({
   horizIconContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginVertical: 40,
   },
   icon: {
     width: 150,
     height: 150,
     marginLeft: -40,
     marginRight: 40,
-    marginTop: 10,
+    marginTop: 8,
   },
   rotatedIcon15: {
     transform: [{ rotate: '13.38deg'}],
-    width: 260,
-    height: 200,
+    width: 240,
+    height: 190,
     marginLeft: 20,
   },
   buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
+    flex: 3,
+    flexDirection: 'col',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 40,
     // backgroundColor: 'black',
+    gap: 6,
   },
   button: {
-    flex: 1,
-    width: 225,
-    height: 50,
-    backgroundColor: '#585123',
+    width: 330,
+    height: 60,
+    backgroundColor: '#B55710',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
-    marginBottom: 70,
     marginHorizontal: 30,
+    borderColor: '#585123',
+    borderWidth: 5,
   },
   button1: {
-    flex: 1,
-    width: 225,
-    height: 150,
-    backgroundColor: '#585123',
+    width: 330,
+    height: 190,
+    backgroundColor: '#B55710',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
     marginHorizontal: 30,
+    borderColor: '#585123',
+    borderWidth: 5,
+    gap: 5,
+  },
+  aboutButton: {
+    width: 330,
+    height: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    borderColor: '#585123',
+    borderWidth: 5,
+    marginTop: 15,
   },
   buttonText: {
     fontSize: 18,
     textAlign: 'left',
-    marginTop: 10,
-    marginBottom: 16,
     color: '#ffff',
+    fontWeight: 'bold',
+  },
+  aboutButtonText: {
+    fontSize: 18,
+    textAlign: 'left',
+    color: '#585123',
     fontWeight: 'bold',
   },
   camera: {
