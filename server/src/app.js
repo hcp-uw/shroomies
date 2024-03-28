@@ -1,15 +1,19 @@
 const express = require('express');
 const cors = require('cors');
+var bodyParser = require('body-parser');
 
 const port = 4000;
 const app = express();
 app.use(cors());
+var jsonParser = bodyParser.json();
 
 /** GET endpoint for sending back a Hello World message */
-app.post('/identify', (req, res) => {
+app.post('/identify', jsonParser, function (req, res) {
   //res.type('text');
-  //const imgURI = req.body.image;
-  res.send(res.json({response: "haha this isn't implemented yetttt"}));
+  console.log("Image Received:");
+  const imgURI = req.body.image;
+  console.log(imgURI);
+  res.send({response: Math.random() > 0.5});
 });
 
 // Tells our app to listen to the given port
