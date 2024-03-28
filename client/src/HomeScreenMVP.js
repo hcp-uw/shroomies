@@ -1,6 +1,5 @@
-import React, { useState, Component, Fragment } from 'react';
+import React, { useState, Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import * as ImagePicker from 'expo-image-picker';
 //hi
 
@@ -107,14 +106,6 @@ const HomeScreenMVP = ({navigation}) => {
           <Text style={styles.aboutButtonText}>About Us</Text>
         </TouchableOpacity>
       </View>
-
-      {/* <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={selectImage}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Select Image</Text>
-        </TouchableOpacity>
-      </View> */}
     </SafeAreaView>
   );
 }
@@ -181,7 +172,6 @@ const styles = StyleSheet.create({
     flexDirection: 'col',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'black',
     gap: 6,
   },
   button: {
@@ -205,7 +195,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     borderColor: '#585123',
     borderWidth: 5,
-    gap: 5,
+    gap: 10,
   },
   aboutButton: {
     width: 330,
@@ -221,7 +211,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'left',
     color: '#ffff',
-    fontWeight: 'bold',
   },
   aboutButtonText: {
     fontSize: 18,
