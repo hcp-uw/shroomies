@@ -47,9 +47,12 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   const sendImage = async (imageURI) => {
-    await fetch(serverURL, {method: "POST", body: {image: JSON.stringify(imageURI)}})
-      .then((result) => doImageResponse(result))
-      .catch((result) => {console.log("could not connect to server");});
+    fetch(serverURL, 
+      {method: "POST", 
+      body: JSON.stringify({image: imageURI}), 
+      headers: {"Content-Type": "application/json"}})
+      .then(doImageResponse(result))
+      .catch((e) => console.log(e));
   }
 
   const doImageResponse = (res) => {
@@ -57,8 +60,19 @@ const HomeScreenMVP = ({navigation}) => {
       console.log(res);
       return;
     }
-    //console.log(JSON.stringify(res));
-    console.log(res.response);
+
+    res.json()
+      .then(doImageResponseProcessing)
+      .catch((e) => console.log(e));
+  }
+
+  const doImageResponseProcessing = (data) => {
+    if (!isRecord(data)) {
+      console.error("bad data from /identify: not a record", data);
+      return;
+    }
+
+    console.log(data.response);
   }
 
   return (
@@ -225,3 +239,7 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreenMVP;
+
+export const isRecord = (val) => {
+  return val !== null && typeof val === "object";
+};
