@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 var bodyParser = require('body-parser');
 
+
 const port = 4000;
 const app = express();
 app.use(cors());
@@ -13,7 +14,15 @@ app.post('/identify', jsonParser, function (req, res) {
   console.log("Image Received:");
   const imgURI = req.body.image;
   console.log(imgURI);
-  res.send({response: Math.random() > 0.5});
+  $.ajax({
+    type: "POST",
+    url: "tflite_predict.py",
+    data: { param: imgURI}
+  }).done(function( e ) {
+    fetch('./model_output.json')
+    .then((response) => response.json())
+    .then((json) => res.send({response: json.output > 0.5}));
+  });
 });
 
 // Tells our app to listen to the given port

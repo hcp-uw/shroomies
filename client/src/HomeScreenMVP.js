@@ -20,7 +20,7 @@ const HomeScreenMVP = ({navigation}) => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
-        sendImage(image);
+        sendImage(result.assets[0].uri);
       }
     } catch (error) {
       alert("Error uploading image: " + error);
@@ -39,7 +39,7 @@ const HomeScreenMVP = ({navigation}) => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
-        sendImage(image);
+        sendImage(result.assets[0].uri);
       }
     } catch (error) {
       alert("Error uploading image: " + error);
@@ -47,11 +47,12 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   const sendImage = async (imageURI) => {
+    console.log(imageURI);
     fetch(serverURL, 
       {method: "POST", 
       body: JSON.stringify({image: imageURI}), 
       headers: {"Content-Type": "application/json"}})
-      .then(doImageResponse(result))
+      .then(doImageResponse)
       .catch((e) => console.log(e));
   }
 
@@ -67,12 +68,11 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   const doImageResponseProcessing = (data) => {
-    if (!isRecord(data)) {
-      console.error("bad data from /identify: not a record", data);
+    if (!Array.isArray(data) || data.length === 0) {
+      console.error("bad response from /identify - not proper array")
       return;
     }
-
-    console.log(data.response);
+    console.log(data[0])
   }
 
   return (
