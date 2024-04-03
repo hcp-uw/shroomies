@@ -47,9 +47,9 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   const sendImage = async (imageURI) => {
-    fetch(serverURL, 
-      {method: "POST", 
-      body: JSON.stringify({image: imageURI}), 
+    fetch(serverURL,
+      {method: "POST",
+      body: JSON.stringify({image: imageURI}),
       headers: {"Content-Type": "application/json"}})
       .then(doImageResponse(result))
       .catch((e) => console.log(e));
@@ -115,7 +115,8 @@ const HomeScreenMVP = ({navigation}) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('AboutPage')}
+          // onPress={() => navigation.navigate('AboutPage')}
+          onPress={() => navigation.navigate('Results')}
           style={styles.aboutButton}>
           <Text style={styles.aboutButtonText}>About Us</Text>
         </TouchableOpacity>

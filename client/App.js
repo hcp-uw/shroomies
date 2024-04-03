@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 //import HomeScreen from './src/HomeScreen';
 import HomeScreenMVP from './src/HomeScreenMVP';
 import AboutPageMVP from './src/AboutPageMVP';
+import Results from './src/Results';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,13 @@ const App = () => {
         <Stack.Screen
           name="AboutPage"
           component={AboutPageMVP}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Results"
+          component={Results}
           options={{
             headerShown: false,
           }}
