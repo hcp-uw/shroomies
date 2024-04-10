@@ -47,9 +47,9 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
   }
 
   const sendImage = async (imageURI) => {
-    fetch(serverURL, 
-      {method: "POST", 
-      body: JSON.stringify({image: imageURI}), 
+    fetch(serverURL,
+      {method: "POST",
+      body: JSON.stringify({image: imageURI}),
       headers: {"Content-Type": "application/json"}})
       .then(doImageResponse)
       .catch((e) => {console.log(e)});
@@ -117,6 +117,7 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
 
         <TouchableOpacity
           onPress={() => navigation.navigate('AboutPage')}
+          // onPress={() => navigation.navigate('Results')}
           style={styles.aboutButton}>
           <Text style={styles.aboutButtonText}>About Us</Text>
         </TouchableOpacity>
