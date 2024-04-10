@@ -26,8 +26,9 @@ const Results = ({nav, poisonous, image}) => {
           source={require('../assets/shroomies-x.png')}
           style={styles.resultsImage}
         />
-        <Text style={styles.resultsText}>{poisonous[3]>0.5? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
+        <Text style={styles.resultsText}>{poisonous[3]>2*Math.pow(10, -8)? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
         <Text style={styles.disclaimer}>
+          {poisonous[3]}
           Disclaimer: This app is developed by students for educational and recreational purposes.
           Users must assume responsibility for actions taken related to mushroom identification, such
           as consumption and other associated risks.

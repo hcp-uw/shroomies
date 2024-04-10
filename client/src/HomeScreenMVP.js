@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
     lineHeight: 40,
     textAlign: 'left',
     color: '#772F1A',
-    fontFamily: "Lato",
   },
   hr: {
     borderBottomColor: "black",
@@ -161,7 +160,6 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     textAlign: 'left',
     color: '#772F1A',
-    fontFamily: "Lato",
   },
   iconContainer: {
     marginRight: 10,
