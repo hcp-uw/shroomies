@@ -60,5 +60,5 @@ def identify():
 
 
 if __name__ == '__main__':
-    # run flask run -p 4000
+    # flask run -p 4000
     app.run(debug=True, port=4000)
