@@ -72,7 +72,7 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
       return;
     }
     setPoisonous(data[0]);
-    navigation.navigate('ResultsPage');
+    navigation.navigate('Results');
   }
 
   return (

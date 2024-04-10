@@ -42,7 +42,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Results"
-          component={Results}
+          component={(nav) => Results({nav, image, poisonous})}
           options={{
             headerShown: false,
           }}
