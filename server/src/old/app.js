@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 var bodyParser = require('body-parser');
-
+console.error("DEPRECATED - USE flask run TO START SERVER");
 
 const port = 4000;
 const app = express();

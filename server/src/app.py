@@ -55,8 +55,10 @@ def identify():
     # with open(output_path + "/model_output.json", "w") as f:
     #     json.dump({'output': float(output_data[0][0])}, f)
     # return jsonify(float(output_data[0][0]))
+    print(jsonify(np.ndarray.tolist(output_data)))
     return jsonify(np.ndarray.tolist(output_data))
 
 
 if __name__ == '__main__':
+    # run flask run -p 4000
     app.run(debug=True, port=4000)

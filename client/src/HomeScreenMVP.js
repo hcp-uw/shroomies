@@ -3,8 +3,8 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaVie
 import * as ImagePicker from 'expo-image-picker';
 //hi
 
-const HomeScreenMVP = ({navigation, image, setImage}) => {
-  const [searchText, setSearchText] = useState('');
+const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
+  navigation = nav.navigation;
   const serverURL = "http://localhost:4000/identify";
 
   const uploadImage = async () => {
@@ -46,13 +46,12 @@ const HomeScreenMVP = ({navigation, image, setImage}) => {
   }
 
   const sendImage = async (imageURI) => {
-    console.log(imageURI);
     fetch(serverURL, 
       {method: "POST", 
       body: JSON.stringify({image: imageURI}), 
       headers: {"Content-Type": "application/json"}})
       .then(doImageResponse)
-      .catch((e) => console.log(e));
+      .catch((e) => {console.log(e)});
   }
 
   const doImageResponse = (res) => {
@@ -63,7 +62,7 @@ const HomeScreenMVP = ({navigation, image, setImage}) => {
 
     res.json()
       .then(doImageResponseProcessing)
-      .catch((e) => console.log(e));
+      .catch((e) => {console.log(e);});
   }
 
   const doImageResponseProcessing = (data) => {
@@ -71,7 +70,7 @@ const HomeScreenMVP = ({navigation, image, setImage}) => {
       console.error("bad response from /identify - not proper array")
       return;
     }
-    console.log(data[0])
+    setPoisonous(data[0]);
   }
 
   return (

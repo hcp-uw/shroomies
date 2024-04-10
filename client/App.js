@@ -15,6 +15,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
   const [image, setImage] = useState(null);
+  const [poisonous, setPoisonous] = useState(null);
 
   return (
     <NavigationContainer>
@@ -25,7 +26,7 @@ const App = () => {
       >
         <Stack.Screen
           name="HomeScreen"
-          component={(nav) => HomeScreenMVP({nav, image, setImage})}
+          component={(nav) => HomeScreenMVP({nav, setImage, setPoisonous})}
           options={{
             headerShown: false,
           }}
