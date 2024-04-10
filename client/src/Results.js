@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 
-const Results = ({navigation}) => {
+const Results = ({nav, poisonous, image}) => {
+  navigation = nav.navigation;
+  // var mushroom = this.props.active
+  //   ? require(imag)
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
       <View style={styles.headingContainer}>
@@ -14,6 +17,7 @@ const Results = ({navigation}) => {
       </View>
       <View style={styles.imageContainer}>
         <Image
+          source={{uri: image}}
           style={styles.image}
         />
       </View>
@@ -22,7 +26,7 @@ const Results = ({navigation}) => {
           source={require('../assets/shroomies-x.png')}
           style={styles.resultsImage}
         />
-        <Text style={styles.resultsText}>Poisonous</Text>
+        <Text style={styles.resultsText}>{poisonous[3]>0.5? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
         <Text style={styles.disclaimer}>
           Disclaimer: This app is developed by students for educational and recreational purposes.
           Users must assume responsibility for actions taken related to mushroom identification, such
