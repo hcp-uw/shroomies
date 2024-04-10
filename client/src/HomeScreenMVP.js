@@ -115,8 +115,8 @@ const HomeScreenMVP = ({navigation}) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          // onPress={() => navigation.navigate('AboutPage')}
-          onPress={() => navigation.navigate('Results')}
+          onPress={() => navigation.navigate('AboutPage')}
+          // onPress={() => navigation.navigate('Results')}
           style={styles.aboutButton}>
           <Text style={styles.aboutButtonText}>About Us</Text>
         </TouchableOpacity>
