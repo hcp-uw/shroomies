@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-// import { StaticServer } from 'react-native-static-server';
+//import { StaticServer } from 'react-native-static-server';
 // require('../src/app.js');
 
 // Import your HomeScreen component
@@ -25,6 +25,7 @@ const App = () => {
         }}
       >
         <Stack.Screen
+          
           name="HomeScreen"
           component={(nav) => HomeScreenMVP({nav, setImage, setPoisonous})}
           options={{
