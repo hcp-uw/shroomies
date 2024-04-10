@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,6 +14,7 @@ import AboutPageMVP from './src/AboutPageMVP';
 const Stack = createStackNavigator();
 
 const App = () => {
+  const [image, setImage] = useState(null);
 
   return (
     <NavigationContainer>
@@ -23,7 +25,7 @@ const App = () => {
       >
         <Stack.Screen
           name="HomeScreen"
-          component={HomeScreenMVP}
+          component={(nav) => HomeScreenMVP({nav, image, setImage})}
           options={{
             headerShown: false,
           }}

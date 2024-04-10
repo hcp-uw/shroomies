@@ -3,9 +3,8 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaVie
 import * as ImagePicker from 'expo-image-picker';
 //hi
 
-const HomeScreenMVP = ({navigation}) => {
+const HomeScreenMVP = ({navigation, image, setImage}) => {
   const [searchText, setSearchText] = useState('');
-  const [image, setImage] = useState(null);
   const serverURL = "http://localhost:4000/identify";
 
   const uploadImage = async () => {
