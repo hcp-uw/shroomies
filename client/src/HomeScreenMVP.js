@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
   navigation = nav.navigation;
   const serverURL = "http://localhost:4000/identify";
-  
+
   const uploadImage = async () => {
     try {
       await ImagePicker.requestCameraPermissionsAsync();
