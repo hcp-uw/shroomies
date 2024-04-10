@@ -1,12 +1,10 @@
-import React, { useState, Component, Fragment } from 'react';
+import React, { useState, Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import * as ImagePicker from 'expo-image-picker';
 //hi
 
-const HomeScreenMVP = ({navigation}) => {
+const HomeScreenMVP = ({navigation, image, setImage}) => {
   const [searchText, setSearchText] = useState('');
-  const [image, setImage] = useState(null);
   const serverURL = "http://localhost:4000/identify";
 
   const uploadImage = async () => {
@@ -21,7 +19,7 @@ const HomeScreenMVP = ({navigation}) => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
-        sendImage(image);
+        sendImage(result.assets[0].uri);
       }
     } catch (error) {
       alert("Error uploading image: " + error);
@@ -40,7 +38,7 @@ const HomeScreenMVP = ({navigation}) => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
-        sendImage(image);
+        sendImage(result.assets[0].uri);
       }
     } catch (error) {
       alert("Error uploading image: " + error);
@@ -48,9 +46,13 @@ const HomeScreenMVP = ({navigation}) => {
   }
 
   const sendImage = async (imageURI) => {
-    await fetch(serverURL, {method: "POST", body: {image: JSON.stringify(imageURI)}})
-      .then((result) => doImageResponse(result))
-      .catch((result) => {console.log("could not connect to server");});
+    console.log(imageURI);
+    fetch(serverURL, 
+      {method: "POST", 
+      body: JSON.stringify({image: imageURI}), 
+      headers: {"Content-Type": "application/json"}})
+      .then(doImageResponse)
+      .catch((e) => console.log(e));
   }
 
   const doImageResponse = (res) => {
@@ -58,8 +60,18 @@ const HomeScreenMVP = ({navigation}) => {
       console.log(res);
       return;
     }
-    //console.log(JSON.stringify(res));
-    console.log(res.response);
+
+    res.json()
+      .then(doImageResponseProcessing)
+      .catch((e) => console.log(e));
+  }
+
+  const doImageResponseProcessing = (data) => {
+    if (!Array.isArray(data) || data.length === 0) {
+      console.error("bad response from /identify - not proper array")
+      return;
+    }
+    console.log(data[0])
   }
 
   return (
@@ -107,14 +119,6 @@ const HomeScreenMVP = ({navigation}) => {
           <Text style={styles.aboutButtonText}>About Us</Text>
         </TouchableOpacity>
       </View>
-
-      {/* <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={selectImage}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Select Image</Text>
-        </TouchableOpacity>
-      </View> */}
     </SafeAreaView>
   );
 }
@@ -181,7 +185,6 @@ const styles = StyleSheet.create({
     flexDirection: 'col',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'black',
     gap: 6,
   },
   button: {
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     borderColor: '#585123',
     borderWidth: 5,
-    gap: 5,
+    gap: 10,
   },
   aboutButton: {
     width: 330,
@@ -221,7 +224,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'left',
     color: '#ffff',
-    fontWeight: 'bold',
   },
   aboutButtonText: {
     fontSize: 18,
@@ -236,3 +238,7 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreenMVP;
+
+export const isRecord = (val) => {
+  return val !== null && typeof val === "object";
+};
