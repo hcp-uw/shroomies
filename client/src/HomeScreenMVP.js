@@ -1,12 +1,14 @@
 import React, { useState, Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+
 //hi
 
-const HomeScreenMVP = ({navigation, image, setImage}) => {
+const HomeScreenMVP = ({nav, image, setImage}) => {
+  navigation = nav.navigation;
   const [searchText, setSearchText] = useState('');
   const serverURL = "http://localhost:4000/identify";
-
+  
   const uploadImage = async () => {
     try {
       await ImagePicker.requestCameraPermissionsAsync();
@@ -112,6 +114,7 @@ const HomeScreenMVP = ({navigation, image, setImage}) => {
           style={styles.button}>
           <Text style={styles.buttonText}>Select Image</Text>
         </TouchableOpacity>
+
 
         <TouchableOpacity
           onPress={() => navigation.navigate('AboutPage')}
