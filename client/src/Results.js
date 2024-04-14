@@ -23,7 +23,10 @@ const Results = ({nav, poisonous, image}) => {
       </View>
       <View style={styles.infoContainer}>
         <Image
-          source={require('../assets/shroomies-x.png')}
+          source={
+            poisonous[3]>2*Math.pow(10, -8) ?
+            require('../assets/shroomies-x.png') :
+            require('../assets/shroomies-check.png')}
           style={styles.resultsImage}
         />
         <Text style={styles.resultsText}>{poisonous[3]>2*Math.pow(10, -8)? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
