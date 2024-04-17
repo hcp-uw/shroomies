@@ -15,7 +15,7 @@ Mushroom + Homies = Shroomies. **_We are not substance abusers._**
 [Aarfan Hussain](https://github.com/AHussain101) - Frontend\
 [James Parrott](https://github.com/jamesdwa) - Backend Lead\
 Angela Wu - Backend\
-Alec Situ - Backend\
+[Alec Situ](https://github.com/Err0r64) - Backend
 
 <!-- # React Native + Node Template
 Created by Rasmus Makiniemi, curated by the Tech Team
