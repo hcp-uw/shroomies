@@ -1,4 +1,23 @@
-# React Native + Node Template
+# FungiFind
+FungiFind is a mobile application for iOS and Android that allows users to identify if a mushroom is poisonous by taking or uploading a photo of the species through the app.
+
+Check out our Figma design [here](https://www.figma.com/file/5jvVQx2kV1F6DvpRpBQqyH/FungiFind?type=design&node-id=148%3A2&mode=design&t=xJEhWo4EEEgBctaL-1)
+
+Mushroom + Homies = Shroomies. **_We are not substance abusers._**
+
+## Description
+
+## Installation / Usage
+
+## Credits
+[Paulina Teran](https://github.com/paulitera) - Project Manager and Frontend
+[Connor Sun](https://github.com/connorsun) - Frontend
+[Aarfan Hussain](https://github.com/AHussain101) - Frontend
+[James Parrott](https://github.com/jamesdwa) - Backend Lead
+Angela Wu - Backend
+Alec Situ - Backend
+
+<!-- # React Native + Node Template
 Created by Rasmus Makiniemi, curated by the Tech Team
 
 ## Background
@@ -21,4 +40,4 @@ Once you are done with that, start following the steps listed in the README's in
 
 Happy coding!
 
-*PS: This template is far from perfect, so if you find anything wrong, have any questions, or run into any steps you do not understand, reach out to the tech team!*
+*PS: This template is far from perfect, so if you find anything wrong, have any questions, or run into any steps you do not understand, reach out to the tech team!* -->
