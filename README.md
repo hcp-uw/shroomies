@@ -10,12 +10,12 @@ Mushroom + Homies = Shroomies. **_We are not substance abusers._**
 ## Installation / Usage
 
 ## Credits
-[Paulina Teran](https://github.com/paulitera) - Project Manager and Frontend
-[Connor Sun](https://github.com/connorsun) - Frontend
-[Aarfan Hussain](https://github.com/AHussain101) - Frontend
-[James Parrott](https://github.com/jamesdwa) - Backend Lead
-Angela Wu - Backend
-Alec Situ - Backend
+[Paulina Teran](https://github.com/paulitera) - Project Manager and Frontend\
+[Connor Sun](https://github.com/connorsun) - Frontend\
+[Aarfan Hussain](https://github.com/AHussain101) - Frontend\
+[James Parrott](https://github.com/jamesdwa) - Backend Lead\
+Angela Wu - Backend\
+Alec Situ - Backend\
 
 <!-- # React Native + Node Template
 Created by Rasmus Makiniemi, curated by the Tech Team
