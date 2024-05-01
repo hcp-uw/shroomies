@@ -2,7 +2,6 @@ import React, { useState, Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import publicIP from 'react-native-public-ip';
-var RNFS = require('react-native-fs');
 
 //hi
 
@@ -54,6 +53,7 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
       });
 
       if (!result.canceled) {
+        console.log(result.assets[0]);
         setImage(result.assets[0].uri);
         sendImage(result.assets[0].uri);
       }
@@ -63,17 +63,34 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
   }
 
   const sendImage = async (imageURI) => {
-    console.log(imageURI)
-    RNFS.readFile(imageURI, 'base64').then((image) => {
-      fetch(serverURL,
-        {method: "POST",
-        body: JSON.stringify({image: image}),
-        headers: {"Content-Type": "application/json"}})
+    const image = await fetchImageFromUri(imageURI);
+    console.log(image);
+    var reader = new FileReader();
+    reader.onload = () => {
+        var Data = { image:reader.result };
+        var headers = {"Content-Type": "application/json"}
+        fetch(serverURL, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(Data)
+        })
         .then(doImageResponse)
-        .catch((e) => {console.log(e)})
-      });
-    
+        .catch((e) => {console.log(e)});
+    }
+    reader.readAsDataURL(image);
+    // fetch(serverURL,
+    //   {method: "POST",
+    //   body: JSON.stringify({image: image}),
+    //   headers: {"Content-Type": "application/json"}})
+    //   .then(doImageResponse)
+    //   .catch((e) => {console.log(e)});
   }
+
+  const fetchImageFromUri = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    return blob;
+  };
 
   const doImageResponse = (res) => {
     if (res.status !== 200) {
