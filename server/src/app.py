@@ -7,17 +7,19 @@ from os.path import dirname, join
 import http.server
 import socketserver
 from requests import get
-
-
+from PIL import Image
+import io
 
 app = Flask(__name__)
 
 @app.route('/identify', methods=['POST'])
 def identify():
     req_json = request.get_json()
-    img = req_json['image']
-    print(img)
-    print(type(img))
+    img_data = req_json['image']
+    # img = Image.open(io.BytesIO(bytes(img_data, 'utf-8')))
+    img = Image.frombytes('RGBA', (128,128), bytes(img_data, 'utf-8'), 'raw')
+    # print(img)
+    # print(type(img))
     # img_uri = img_uri[5:]
 
     current_dir = dirname(__file__)
@@ -37,10 +39,15 @@ def identify():
 
     # img_path = join(current_dir, img_uri)
     # img = cv2.imread(img_path)
-    print(img)
+    img.show()
+    npimg = np.array(img)
+    print(npimg)
+    print(npimg.shape)
 
     input_shape = input_details[0]['shape'][1:3]
-    resized_image = cv2.resize(img, input_shape)
+    resized_image = cv2.resize(npimg, input_shape)
+    resized_image = np.resize(resized_image, (input_shape[0], input_shape[1], 3)) # 3rd dimension must be 3 (added after uri -> file change)
+    print(resized_image.shape)
 
     normalized_image = resized_image / 255.
 

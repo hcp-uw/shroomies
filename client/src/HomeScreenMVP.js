@@ -67,7 +67,7 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
     console.log(image);
     var reader = new FileReader();
     reader.onload = () => {
-        var Data = { image:reader.result };
+        var Data = { image:reader.result, width: reader.result.width, height: reader.result.height };
         var headers = {"Content-Type": "application/json"}
         fetch(serverURL, {
             method: 'POST',
@@ -88,6 +88,7 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
 
   const fetchImageFromUri = async (uri) => {
     const response = await fetch(uri);
+    console.log(response.naturalWidth);
     const blob = await response.blob();
     return blob;
   };
