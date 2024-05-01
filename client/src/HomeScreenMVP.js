@@ -2,6 +2,7 @@ import React, { useState, Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import publicIP from 'react-native-public-ip';
+var RNFS = require('react-native-fs');
 
 //hi
 
@@ -62,12 +63,16 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
   }
 
   const sendImage = async (imageURI) => {
-    fetch(serverURL,
-      {method: "POST",
-      body: JSON.stringify({image: imageURI}),
-      headers: {"Content-Type": "application/json"}})
-      .then(doImageResponse)
-      .catch((e) => {console.log(e)});
+    console.log(imageURI)
+    RNFS.readFile(imageURI, 'base64').then((image) => {
+      fetch(serverURL,
+        {method: "POST",
+        body: JSON.stringify({image: image}),
+        headers: {"Content-Type": "application/json"}})
+        .then(doImageResponse)
+        .catch((e) => {console.log(e)})
+      });
+    
   }
 
   const doImageResponse = (res) => {

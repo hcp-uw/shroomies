@@ -15,9 +15,10 @@ app = Flask(__name__)
 @app.route('/identify', methods=['POST'])
 def identify():
     req_json = request.get_json()
-    img_uri = req_json['image']
-    img_uri = img_uri[5:]
-    print(img_uri)
+    img = req_json['image']
+    print(img)
+    print(type(img))
+    # img_uri = img_uri[5:]
 
     current_dir = dirname(__file__)
 
@@ -34,8 +35,8 @@ def identify():
     output_details = interpreter.get_output_details()
 
 
-    img_path = join(current_dir, img_uri)
-    img = cv2.imread(img_path)
+    # img_path = join(current_dir, img_uri)
+    # img = cv2.imread(img_path)
     print(img)
 
     input_shape = input_details[0]['shape'][1:3]
