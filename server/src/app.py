@@ -16,8 +16,9 @@ app = Flask(__name__)
 def identify():
     req_json = request.get_json()
     img_uri = req_json['image']
-    img_uri = img_uri[5:]
     print(img_uri)
+    img_uri = img_uri[5:]
+    
 
     current_dir = dirname(__file__)
 
