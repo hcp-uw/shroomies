@@ -4,7 +4,10 @@ import numpy as np
 import tensorflow as tf
 import cv2
 from os.path import dirname, join
-import json
+import http.server
+import socketserver
+from requests import get
+
 
 
 app = Flask(__name__)
@@ -59,6 +62,16 @@ def identify():
     return jsonify(np.ndarray.tolist(output_data))
 
 
+# PORT = 4000
+
+# Handler = http.server.SimpleHTTPRequestHandler
+
+# with socketserver.TCPServer(("", PORT), Handler) as httpd:
+#     print("serving at port", PORT)
+#     httpd.serve_forever()
+
 if __name__ == '__main__':
     # flask run -p 4000
-    app.run(debug=True, port=4000)
+    ip = get('https://api.ipify.org').content.decode('utf8')
+    print('My public IP address is: {}'.format(ip))
+    app.run(debug=True, host='0.0.0.0', port=4000)

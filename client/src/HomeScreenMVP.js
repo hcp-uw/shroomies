@@ -1,12 +1,27 @@
 import React, { useState, Component } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import publicIP from 'react-native-public-ip';
 
 //hi
 
 const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
   navigation = nav.navigation;
-  const serverURL = "http://localhost:4000/identify";
+
+  let serverURL = "http://localhost:4000/identify";
+
+  publicIP()
+  .then(ip => {    
+    // ip = "127.0.0.1";
+    ip = "10.19.175.252"; //directly pasted in from server startup output (second ip listed)
+    serverURL = "http://" + ip + ":4000/identify";
+    console.log(serverURL);
+  })
+  .catch(error => {
+    console.log(error);
+    // 'Unable to get IP address.'
+  });
+
 
   const uploadImage = async () => {
     try {
