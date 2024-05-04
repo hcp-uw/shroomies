@@ -1,16 +1,16 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 
 const AboutPageMVP = ({ navigation }) => {
   const teamMembers = [
     { name: 'Paulina Teran', role: 'Project Manager, Front End Developer', image: require('../assets/pfps/paulina.png') },
     { name: 'Connor Sun', role: 'Front End Developer', image: require('../assets/pfps/connor.png') },
     { name: 'Aarfan Hussain', role: 'Front End Developer', image: require('../assets/pfps/aarfan.png') },
+    { name: 'James Parrott', role: ' Back End Lead', image: require('../assets/pfps/james.png') },
     { name: 'Angie Wu', role: 'Back End Developer', image: require('../assets/pfps/angie.png') },
     { name: 'Alex Situ', role: 'Back End Developer', image: require('../assets/pfps/alex.png') },
-    { name: 'James Parrott', role: ' Back End Developer', image: require('../assets/pfps/james.png') },
-    { name: 'Joseph Lee', role: 'Back End Developer', image: require('../assets/pfps/aarfan.png') },
-    { name: 'Sophie Koehler', role: 'Back End Developer', image: require('../assets/pfps/aarfan.png') },
+    // { name: 'Joseph Lee', role: 'Back End Developer', image: require('../assets/pfps/aarfan.png') },
+    // { name: 'Sophie Koehler', role: 'Back End Developer', image: require('../assets/pfps/aarfan.png') },
   ];
 
   // Component to display each team member
@@ -33,93 +33,100 @@ const AboutPageMVP = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('../assets/shroomies_icon.png')}
-          style={styles.logo}
-        />
-        <Text style={styles.title}>About Us</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
+      <View style={styles.container}>
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+            <Image
+              source={require('../assets/arrow-fungifind.png')}
+              style={styles.arrow}
+            />
+          </TouchableOpacity>
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={require('../assets/shroomies_icon.png')}
+              style={styles.logo}
+            />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>About Us</Text>
+            <Text style={styles.aboutUsInfo}>
+              We, also known as Team Shroomies, are a group of students at the University of Washington
+              looking to further our learning by making a mushroom identification app.
+            </Text>
+          </View>
+          <View style={styles.memberListContainer}>
+            {teamMembers.map((member, index) => (
+              <TeamMemberComponent key={index} name={member.name} role={member.role} image={member.image} />
+            ))}
+          </View>
+        </ScrollView>
       </View>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        {teamMembers.map((member, index) => (
-          <TeamMemberComponent key={index} name={member.name} role={member.role} image={member.image} />
-        ))}
-      </ScrollView>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('HomeScreen')}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Back to Home</Text>
-      </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 90,
-    paddingBottom: 34,
+    padding: 16
+  },
+  arrow: {
+    transform: [{ rotate: '180deg'}],
+    width: 40,
+    height: 40,
+  },
+  textContainer: {
+    paddingHorizontal: 25
   },
   title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontSize: 33,
+    lineHeight: 40,
+    color: '#772F1A',
+    marginBottom: 5
   },
-  scrollViewContent: {
+  aboutUsInfo: {
+    fontSize: 16,
+    lineHeight: 20,
+    color: '#772F1A',
+    marginBottom: 10
+  },
+  memberListContainer: {
     alignItems: 'center',
   },
   memberContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    padding: 10,
+    gap: 15
   },
   memberInfo: {
-    marginLeft: 10,
+    width: 160
   },
   memberName: {
-    fontSize: 25,
-    fontWeight: 'bold',
+    fontSize: 21,
+    lineHeight: 26,
+    color: '#772F1A',
+    fontWeight: 'bold'
   },
   memberRole: {
-    fontSize: 20,
-    color: '#555',
-    marginBottom: 10,
+    fontSize: 14,
+    lineHeight: 19,
+    color: '#A06A58',
   },
   icon: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
     borderRadius: 50,
   },
   logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center', 
-
+    alignItems: 'center',
   },
   logo: {
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-  },
-  button: {
-    width: 330,
-    height: 35,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    borderColor: '#585123',
-    borderWidth: 5,
-    marginTop: 15,
-  },
-  buttonText: {
-    fontSize: 18,
-    textAlign: 'left',
-    color: '#585123',
-    fontWeight: 'bold',
+    width: 120,
+    height: 120,
   },
 });
 
