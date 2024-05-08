@@ -11,9 +11,9 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
   let serverURL = "http://localhost:4000/identify";
 
   publicIP()
-  .then(ip => {    
+  .then(ip => {
     // ip = "127.0.0.1";
-    ip = "10.19.175.252"; //directly pasted in from server startup output (second ip listed)
+    ip = "10.18.90.83"; //directly pasted in from server startup output (second ip listed)
     serverURL = "http://" + ip + ":4000/identify";
     console.log(serverURL);
   })
