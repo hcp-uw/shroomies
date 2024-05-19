@@ -5,7 +5,7 @@ import publicIP from 'react-native-public-ip';
 
 //hi
 
-const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
+const HomeScreenMVP = ({ nav, setImage, setPoisonous, setIsLoading }) => {
   navigation = nav.navigation;
 
   let serverURL = "http://localhost:4000/identify";
@@ -69,6 +69,7 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
     reader.onload = () => {
         var Data = { image:reader.result, width: reader.result.width, height: reader.result.height };
         var headers = {"Content-Type": "application/json"}
+        setIsLoading(true); // new
         fetch(serverURL, {
             method: 'POST',
             headers: headers,
@@ -109,6 +110,7 @@ const HomeScreenMVP = ({nav, setImage, setPoisonous }) => {
       console.error("bad response from /identify - not proper array")
       return;
     }
+    setIsLoading(false);
     setPoisonous(data[0]);
     navigation.navigate('Results');
   }
