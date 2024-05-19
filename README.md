@@ -1,13 +1,39 @@
 # FungiFind
-FungiFind is a mobile application for iOS and Android that allows users to identify if a mushroom is poisonous by taking or uploading a photo of the species through the app.
+FungiFind is a mobile application for iOS and Android that allows users to identify if a mushroom is poisonous by taking or uploading a photo of the species through the app. This project was made for the Husky Coding Project RSO at University of Washington, Seattle.
 
 Check out our Figma design [here](https://www.figma.com/file/5jvVQx2kV1F6DvpRpBQqyH/FungiFind?type=design&node-id=148%3A2&mode=design&t=xJEhWo4EEEgBctaL-1)
 
 Mushroom + Homies = Shroomies. **_We are not substance abusers._**
 
-## Description
-
 ## Installation / Usage
+
+Make sure you have Node.js installed on your computer and Expo Go on you mobile device.
+
+To install dependencies run
+```
+npm install
+```
+
+To run the app
+```
+cd client
+```
+```
+npm start
+```
+
+Download the model from [here](https://drive.google.com/drive/u/1/folders/1DM6uPu0wTsioXFdnRzWzRy-jyfy72zsM) and save
+under /server/mushroom_models
+
+Make sure to install all dependencies.
+
+To run the server, in a new terminal type
+```
+cd server/src
+```
+```
+python3 app.py
+```
 
 ## Credits
 [Paulina Teran](https://github.com/paulitera) - Project Manager and Frontend\
