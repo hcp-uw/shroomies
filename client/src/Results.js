@@ -28,26 +28,30 @@ const Results = ({ nav, poisonous, image, isLoading }) => {
             source={{uri: image}}
             style={styles.image}
           />
-        </View>
-        <View style={styles.infoContainer}>
-          <Image
-            source={
-              poisonous[3]>2*Math.pow(10, -8) ?
-              require('../assets/shroomies-x.png') :
-              require('../assets/shroomies-check.png')}
-            style={styles.resultsImage}
-          />
-          <Text style={styles.resultsText}>{poisonous[3]>2*Math.pow(10, -8)? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
-          <Text style={styles.disclaimer}>
-            {poisonous[3]}
-            Disclaimer: This app is developed by students for educational and recreational purposes.
-            Users must assume responsibility for actions taken related to mushroom identification, such
-            as consumption and other associated risks.
-          </Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
+      </View>
+      <View style={styles.imageContainer}>
+        <Image
+          source={{uri: image}}
+          style={styles.image}
+        />
+      </View>
+      <View style={styles.infoContainer}>
+        <Image
+          source={
+            poisonous[3]>2*Math.pow(10, -8) ?
+            require('../assets/shroomies-x.png') :
+            require('../assets/shroomies-check.png')}
+          style={styles.resultsImage}
+        />
+        <Text style={styles.resultsText}>{poisonous[3]>2*Math.pow(10, -8)? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
+        <Text style={styles.disclaimer}>
+          Disclaimer: This app is developed by students for educational and recreational purposes.
+          Users must assume responsibility for actions taken related to mushroom identification, such
+          as consumption and other associated risks.
+        </Text>
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
