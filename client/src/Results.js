@@ -53,6 +53,7 @@ const Results = ({ nav, poisonous, image, isLoading }) => {
     </SafeAreaView>
   );
 }
+}
 
 const styles = StyleSheet.create({
   headingContainer: {
