@@ -8,7 +8,7 @@ const AboutPageMVP = ({ navigation }) => {
     { name: 'Aarfan Hussain', role: 'Front End Developer', image: require('../assets/pfps/aarfan.png') },
     { name: 'James Parrott', role: ' Back End Lead', image: require('../assets/pfps/james.png') },
     { name: 'Angie Wu', role: 'Back End Developer', image: require('../assets/pfps/angie.png') },
-    { name: 'Alex Situ', role: 'Back End Developer', image: require('../assets/pfps/alex.png') },
+    { name: 'Alec Situ', role: 'Back End Developer', image: require('../assets/pfps/alex.png') },
     // { name: 'Joseph Lee', role: 'Back End Developer', image: require('../assets/pfps/aarfan.png') },
     // { name: 'Sophie Koehler', role: 'Back End Developer', image: require('../assets/pfps/aarfan.png') },
   ];
