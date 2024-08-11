@@ -11,10 +11,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreenMVP from './src/HomeScreenMVP';
 import AboutPageMVP from './src/AboutPageMVP';
 import Results from './src/Results';
+import { LogBox } from 'react-native';
 
 const Stack = createStackNavigator();
 
 const App = () => {
+  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+  LogBox.ignoreAllLogs();//Ignore all log notifications
   const [image, setImage] = useState(null);
   const [poisonous, setPoisonous] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // new
