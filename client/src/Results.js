@@ -1,15 +1,73 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native';
 
-const Results = ({ nav, poisonous, image, isLoading }) => {
+const Results = ({ nav, poisonous, setPoisonous, image, isLoading, setIsLoading }) => {
   navigation = nav.navigation;
   // var mushroom = this.props.active
   //   ? require(imag)
 
+  const sendImage = async (imageURI) => {
+    const imagedata = await fetchImageFromUri(imageURI);
+    console.log(imagedata);
+    var reader = new FileReader();
+    reader.onload = () => {
+        var Data = { imagedata:reader.result, width: reader.result.width, height: reader.result.height };
+        var headers = {"Content-Type": "application/json"}
+        fetch(serverURL, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(Data)
+        })
+        .then(doImageResponse)
+        .catch((e) => {console.log(e)});
+    }
+    reader.readAsDataURL(image);
+    // fetch(serverURL,
+    //   {method: "POST",
+    //   body: JSON.stringify({image: image}),
+    //   headers: {"Content-Type": "application/json"}})
+    //   .then(doImageResponse)
+    //   .catch((e) => {console.log(e)});
+  }
+
+  const fetchImageFromUri = async (uri) => {
+    const response = await fetch(uri);
+    console.log(response.naturalWidth);
+    const blob = await response.blob();
+    return blob;
+  };
+
+  const doImageResponse = (res) => {
+    if (res.status !== 200) {
+      console.log(res);
+      return;
+    }
+
+    res.json()
+      .then(doImageResponseProcessing)
+      .catch((e) => {console.log(e);});
+  }
+
+  const doImageResponseProcessing = (data) => {
+    if (!Array.isArray(data) || data.length === 0) {
+      console.error("bad response from /identify - not proper array")
+      return;
+    }
+    setIsLoading(false);
+    setPoisonous(data[0]);
+    navigation.navigate('Results');
+  }
+
+  try {
+    sendImage(image);
+  } catch (error) {
+    alert("Error sending image: " + error);
+  }
+
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color={"#fff"} />
+        <ActivityIndicator size="large" color="#772F1A" />
       </View>
     );
   } else {
