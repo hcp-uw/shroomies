@@ -5,14 +5,17 @@ import publicIP from 'react-native-public-ip';
 
 //hi
 
-const HomeScreenMVP = ({ nav, setImage, image, setPoisonous, setIsLoading }) => {
-  navigation = nav.navigation;
+const HomeScreenMVP = ({ navigation }) => {
+  // navigation = nav.navigation;
 
   let serverURL = "http://localhost:4000/identify";
 
+  const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   publicIP()
   .then(ip => {
-    ip = "97.113.236.12";
+    ip = "67.171.29.234";
     // ip = "10.19.175.252"; //directly pasted in from server startup output (second ip listed)
     serverURL = "http://" + ip + ":4000/identify";
     console.log(serverURL);
@@ -36,7 +39,7 @@ const HomeScreenMVP = ({ nav, setImage, image, setPoisonous, setIsLoading }) => 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
         // sendImage(image);
-        setIsLoading(true); // new
+        // setIsLoading(true); // new
         navigation.navigate('Results');
       }
     } catch (error) {
@@ -56,12 +59,18 @@ const HomeScreenMVP = ({ nav, setImage, image, setPoisonous, setIsLoading }) => 
       });
 
       if (!result.canceled) {
-        console.log("test");
         console.log("image selected: " + result.assets[0]);
         setImage(result.assets[0].uri);
+        console.log("select image is set as imageuri: " + {image});
+        console.log("other: " + result.assets[0].uri)
         // sendImage(result.assets[0].uri);
         setIsLoading(true); // new
-        navigation.navigate('Results');
+        navigation.navigate('Results', {
+          image: result.assets[0].uri,
+          serverURL: serverURL,
+          isLoading: {isLoading},
+          setIsLoading: {setIsLoading}
+        });
       } else {
         console.log("cancelled");
       }

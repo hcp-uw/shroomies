@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native';
 
-const Results = ({ nav, poisonous, setPoisonous, image, isLoading, setIsLoading }) => {
-  navigation = nav.navigation;
+const Results = ({ navigation, route }) => {
+  // navigation = nav.navigation;
   // var mushroom = this.props.active
   //   ? require(imag)
 
+  const{ image, serverURL, isLoading, setIsLoading } = route.params;
+  console.log("server passed: " + serverURL);
+  console.log("image passed: " + image);
+
+  const [poisonous, setPoisonous] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+
+  // setIsLoading(true);
+
   const sendImage = async (imageURI) => {
+    console.log("send image triggered");
     const imagedata = await fetchImageFromUri(imageURI);
-    console.log(imagedata);
+    console.log("fetched image data: " + imagedata);
+    console.log("server url: " + serverURL);
     var reader = new FileReader();
     reader.onload = () => {
         var Data = { imagedata:reader.result, width: reader.result.width, height: reader.result.height };
@@ -19,9 +30,9 @@ const Results = ({ nav, poisonous, setPoisonous, image, isLoading, setIsLoading 
             body: JSON.stringify(Data)
         })
         .then(doImageResponse)
-        .catch((e) => {console.log(e)});
+        .catch((e) => {console.log("send image error: " + e)}); // it does not connect to server (network request failed)
     }
-    reader.readAsDataURL(image);
+    reader.readAsDataURL(imagedata);
     // fetch(serverURL,
     //   {method: "POST",
     //   body: JSON.stringify({image: image}),
@@ -32,14 +43,14 @@ const Results = ({ nav, poisonous, setPoisonous, image, isLoading, setIsLoading 
 
   const fetchImageFromUri = async (uri) => {
     const response = await fetch(uri);
-    console.log(response.naturalWidth);
+    console.log("fetchImageURI response natural width: " + response.naturalWidth);
     const blob = await response.blob();
     return blob;
   };
 
   const doImageResponse = (res) => {
     if (res.status !== 200) {
-      console.log(res);
+      console.log("image response result: " + res);
       return;
     }
 
@@ -64,13 +75,13 @@ const Results = ({ nav, poisonous, setPoisonous, image, isLoading, setIsLoading 
     alert("Error sending image: " + error);
   }
 
-  if (isLoading) {
+  while (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#772F1A" />
       </View>
     );
-  } else {
+  }
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
         <View style={styles.headingContainer}>
@@ -105,7 +116,7 @@ const Results = ({ nav, poisonous, setPoisonous, image, isLoading, setIsLoading 
       </SafeAreaView>
   );
 }
-}
+
 
 const styles = StyleSheet.create({
   headingContainer: {
