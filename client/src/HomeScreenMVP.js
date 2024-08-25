@@ -11,11 +11,11 @@ const HomeScreenMVP = ({ navigation }) => {
   let serverURL = "http://localhost:4000/identify";
 
   const [image, setImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   publicIP()
   .then(ip => {
-    ip = "67.171.29.234";
+    ip = "127.0.0.1";
     // ip = "10.19.175.252"; //directly pasted in from server startup output (second ip listed)
     serverURL = "http://" + ip + ":4000/identify";
     console.log(serverURL);
@@ -64,12 +64,12 @@ const HomeScreenMVP = ({ navigation }) => {
         console.log("select image is set as imageuri: " + {image});
         console.log("other: " + result.assets[0].uri)
         // sendImage(result.assets[0].uri);
-        setIsLoading(true); // new
+        // setIsLoading(true); // new
         navigation.navigate('Results', {
           image: result.assets[0].uri,
           serverURL: serverURL,
-          isLoading: {isLoading},
-          setIsLoading: {setIsLoading}
+          // isLoading: {isLoading},
+          // setIsLoading: {setIsLoading}
         });
       } else {
         console.log("cancelled");

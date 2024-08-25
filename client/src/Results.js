@@ -6,14 +6,12 @@ const Results = ({ navigation, route }) => {
   // var mushroom = this.props.active
   //   ? require(imag)
 
-  const{ image, serverURL, isLoading, setIsLoading } = route.params;
+  const{ image, serverURL } = route.params;
   console.log("server passed: " + serverURL);
   console.log("image passed: " + image);
 
   const [poisonous, setPoisonous] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
-
-  // setIsLoading(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const sendImage = async (imageURI) => {
     console.log("send image triggered");
@@ -64,9 +62,10 @@ const Results = ({ navigation, route }) => {
       console.error("bad response from /identify - not proper array")
       return;
     }
-    setIsLoading(false);
     setPoisonous(data[0]);
-    navigation.navigate('Results');
+    setIsLoading(false);
+    console.log(isLoading + ", " + poisonous);
+    // navigation.navigate('Results');
   }
 
   try {
