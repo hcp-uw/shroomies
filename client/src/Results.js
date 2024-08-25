@@ -28,7 +28,7 @@ const Results = ({ navigation, route }) => {
             body: JSON.stringify(Data)
         })
         .then(doImageResponse)
-        .catch((e) => {console.log("send image error: " + e)}); // it does not connect to server (network request failed)
+        .catch((e) => {console.log("send image error: " + e)});
     }
     reader.readAsDataURL(imagedata);
     // fetch(serverURL,
@@ -65,7 +65,6 @@ const Results = ({ navigation, route }) => {
     setPoisonous(data[0]);
     setIsLoading(false);
     console.log(isLoading + ", " + poisonous);
-    // navigation.navigate('Results');
   }
 
   try {
