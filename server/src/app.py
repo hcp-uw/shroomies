@@ -14,8 +14,9 @@ app = Flask(__name__)
 
 @app.route('/identify', methods=['POST'])
 def identify():
+    print("identify triggered")
     req_json = request.get_json()
-    img_data = req_json['image']
+    img_data = req_json['imagedata']
     # img = Image.open(io.BytesIO(bytes(img_data, 'utf-8')))
     img = Image.frombytes('RGBA', (128,128), bytes(img_data, 'utf-8'), 'raw')
     # print(img)
