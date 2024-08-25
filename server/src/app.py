@@ -39,7 +39,7 @@ def identify():
 
     # img_path = join(current_dir, img_uri)
     # img = cv2.imread(img_path)
-    img.show()
+    # img.show()
     npimg = np.array(img)
     print(npimg)
     print(npimg.shape)
