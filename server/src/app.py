@@ -79,7 +79,12 @@ def identify():
 #     httpd.serve_forever()
 
 if __name__ == '__main__':
-    # flask run -p 4000
+    # flask run -p 4000 (OLD WAY)
+    # New way of running server:
+    # create virtualenv by doing virtualenv flask
+    # source bin/activate
+    # pip install: numpy, tensorflow, opencv-python, pillow
+    # copy paste second ip shown into HomeScreenMVP
     ip = get('https://api.ipify.org').content.decode('utf8')
-    print('My public IP address is: {}'.format(ip))
+    # print('My public IP address is: {}'.format(ip))
     app.run(debug=True, host='0.0.0.0', port=4000)
