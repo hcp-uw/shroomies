@@ -40,7 +40,7 @@ def identify():
 
     # img_path = join(current_dir, img_uri)
     # img = cv2.imread(img_path)
-    img.show()
+    # img.show()
     npimg = np.array(img)
     print(npimg)
     print(npimg.shape)
@@ -80,7 +80,14 @@ def identify():
 #     httpd.serve_forever()
 
 if __name__ == '__main__':
-    # flask run -p 4000
+    # flask run -p 4000 (OLD WAY - works for ios sim)
+    # New way of running server:
+    # create virtualenv by doing virtualenv flask
+    # cd flask
+    # source bin/activate
+    # cd ..
+    # pip install numpy tensorflow opencv-python pillow
+    # copy paste second ip shown into HomeScreenMVP
     ip = get('https://api.ipify.org').content.decode('utf8')
-    print('My public IP address is: {}'.format(ip))
+    # print('My public IP address is: {}'.format(ip))
     app.run(debug=True, host='0.0.0.0', port=4000)
