@@ -79,7 +79,7 @@ def identify():
 #     httpd.serve_forever()
 
 if __name__ == '__main__':
-    # flask run -p 4000 (OLD WAY)
+    # flask run -p 4000 (OLD WAY - works for ios sim)
     # New way of running server:
     # create virtualenv by doing virtualenv flask
     # cd flask
