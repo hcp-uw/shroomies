@@ -87,6 +87,7 @@ if __name__ == '__main__':
     # source bin/activate
     # cd ..
     # pip install numpy tensorflow opencv-python pillow
+    # python3 app.py to run the server
     # copy paste second ip shown into HomeScreenMVP
     ip = get('https://api.ipify.org').content.decode('utf8')
     # print('My public IP address is: {}'.format(ip))
