@@ -62,18 +62,26 @@ const Results = ({ navigation, route }) => {
       console.error("bad response from /identify - not proper array")
       return;
     }
-    setPoisonous(data[0]);
-    setIsLoading(false);
+
+    if (poisonous == null) {
+      setPoisonous(data[0]);
+    }
+    if (isLoading == true) {
+      setIsLoading(false);
+    }
+
     console.log(isLoading + ", " + poisonous);
   }
 
-  try {
-    sendImage(image);
-  } catch (error) {
-    alert("Error sending image: " + error);
+  if (isLoading) {
+    try {
+      sendImage(image);
+    } catch (error) {
+      alert("Error sending image: " + error);
+    }
   }
 
-  while (isLoading) {
+  if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#772F1A" />

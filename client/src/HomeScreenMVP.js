@@ -16,7 +16,7 @@ const HomeScreenMVP = ({ navigation }) => {
   publicIP()
   .then(ip => {
     // ip = "127.0.0.1"; works with this ip for ios simulator
-    ip = "192.168.0.183"; //directly pasted in from server startup output (second ip listed)
+    ip = "10.0.0.154"; //directly pasted in from server startup output (second ip listed)
     serverURL = "http://" + ip + ":4000/identify";
     console.log(serverURL);
   })
@@ -40,7 +40,10 @@ const HomeScreenMVP = ({ navigation }) => {
         setImage(result.assets[0].uri);
         // sendImage(image);
         // setIsLoading(true); // new
-        navigation.navigate('Results');
+        navigation.navigate('Results', {
+          image: result.assets[0].uri,
+          serverURL: serverURL,
+        });
       }
     } catch (error) {
       alert("Error uploading image: " + error);
@@ -68,8 +71,6 @@ const HomeScreenMVP = ({ navigation }) => {
         navigation.navigate('Results', {
           image: result.assets[0].uri,
           serverURL: serverURL,
-          // isLoading: {isLoading},
-          // setIsLoading: {setIsLoading}
         });
       } else {
         console.log("cancelled");
