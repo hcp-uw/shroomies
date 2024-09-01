@@ -82,11 +82,13 @@ def identify():
 if __name__ == '__main__':
     # flask run -p 4000 (OLD WAY - works for ios sim)
     # New way of running server:
-    # create virtualenv by doing virtualenv flask
+    # create virtualenv by doing 
+    # virtualenv flask
     # cd flask
     # source bin/activate
     # cd ..
     # pip install numpy tensorflow opencv-python pillow
+    # python3 app.py to run the server
     # copy paste second ip shown into HomeScreenMVP
     ip = get('https://api.ipify.org').content.decode('utf8')
     # print('My public IP address is: {}'.format(ip))
