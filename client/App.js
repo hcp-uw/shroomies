@@ -18,9 +18,9 @@ const Stack = createStackNavigator();
 const App = () => {
   LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
   LogBox.ignoreAllLogs();//Ignore all log notifications
-  const [image, setImage] = useState(null);
-  const [poisonous, setPoisonous] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // new
+  // const [image, setImage] = useState(null);
+  // const [poisonous, setPoisonous] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
 
   return (
     <NavigationContainer>
@@ -31,7 +31,7 @@ const App = () => {
       >
         <Stack.Screen
           name="HomeScreen"
-          component={(nav) => HomeScreenMVP({nav, setImage, setPoisonous, setIsLoading})}
+          component={(props) => HomeScreenMVP ({...props})}
           options={{
             headerShown: false,
           }}
@@ -45,7 +45,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Results"
-          component={(nav) => Results({nav, image, poisonous, isLoading})}
+          component={(props) => Results ({...props})}
           options={{
             headerShown: false,
           }}

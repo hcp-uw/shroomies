@@ -1,18 +1,93 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native';
 
-const Results = ({ nav, poisonous, image, isLoading }) => {
-  navigation = nav.navigation;
+const Results = ({ navigation, route }) => {
+  // navigation = nav.navigation;
   // var mushroom = this.props.active
   //   ? require(imag)
+
+  const{ image, serverURL } = route.params;
+  console.log("server passed: " + serverURL);
+  console.log("image passed: " + image);
+
+  const [poisonous, setPoisonous] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const sendImage = async (imageURI) => {
+    console.log("send image triggered");
+    const imagedata = await fetchImageFromUri(imageURI);
+    console.log("fetched image data: " + imagedata);
+    console.log("server url: " + serverURL);
+    var reader = new FileReader();
+    reader.onload = () => {
+        var Data = { imagedata:reader.result, width: reader.result.width, height: reader.result.height };
+        var headers = {"Content-Type": "application/json"}
+        fetch(serverURL, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(Data)
+        })
+        .then(doImageResponse)
+        .catch((e) => {console.log("send image error: " + e)});
+    }
+    reader.readAsDataURL(imagedata);
+    // fetch(serverURL,
+    //   {method: "POST",
+    //   body: JSON.stringify({image: image}),
+    //   headers: {"Content-Type": "application/json"}})
+    //   .then(doImageResponse)
+    //   .catch((e) => {console.log(e)});
+  }
+
+  const fetchImageFromUri = async (uri) => {
+    const response = await fetch(uri);
+    console.log("fetchImageURI response natural width: " + response.naturalWidth);
+    const blob = await response.blob();
+    return blob;
+  };
+
+  const doImageResponse = (res) => {
+    if (res.status !== 200) {
+      console.log("image response result: " + res);
+      return;
+    }
+
+    res.json()
+      .then(doImageResponseProcessing)
+      .catch((e) => {console.log(e);});
+  }
+
+  const doImageResponseProcessing = (data) => {
+    if (!Array.isArray(data) || data.length === 0) {
+      console.error("bad response from /identify - not proper array")
+      return;
+    }
+
+    if (poisonous == null) {
+      setPoisonous(data[0]);
+    }
+    if (isLoading == true) {
+      setIsLoading(false);
+    }
+
+    console.log(isLoading + ", " + poisonous);
+  }
+
+  if (isLoading) {
+    try {
+      sendImage(image);
+    } catch (error) {
+      alert("Error sending image: " + error);
+    }
+  }
 
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator color={"#fff"} />
+        <ActivityIndicator size="large" color="#772F1A" />
       </View>
     );
-  } else {
+  }
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
         <View style={styles.headingContainer}>
@@ -47,7 +122,7 @@ const Results = ({ nav, poisonous, image, isLoading }) => {
       </SafeAreaView>
   );
 }
-}
+
 
 const styles = StyleSheet.create({
   headingContainer: {

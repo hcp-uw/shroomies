@@ -14,8 +14,9 @@ app = Flask(__name__)
 
 @app.route('/identify', methods=['POST'])
 def identify():
+    print("identify triggered")
     req_json = request.get_json()
-    img_data = req_json['image']
+    img_data = req_json['imagedata']
     # img = Image.open(io.BytesIO(bytes(img_data, 'utf-8')))
     img = Image.frombytes('RGBA', (128,128), bytes(img_data, 'utf-8'), 'raw')
     # print(img)
@@ -79,13 +80,15 @@ def identify():
 #     httpd.serve_forever()
 
 if __name__ == '__main__':
-    # flask run -p 4000 (OLD WAY)
+    # flask run -p 4000 (OLD WAY - works for ios sim)
     # New way of running server:
-    # create virtualenv by doing virtualenv flask
+    # create virtualenv by doing 
+    # virtualenv flask
     # cd flask
     # source bin/activate
     # cd ..
     # pip install numpy tensorflow opencv-python pillow
+    # python3 app.py to run the server
     # copy paste second ip shown into HomeScreenMVP
     ip = get('https://api.ipify.org').content.decode('utf8')
     # print('My public IP address is: {}'.format(ip))

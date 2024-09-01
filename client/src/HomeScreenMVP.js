@@ -5,15 +5,18 @@ import publicIP from 'react-native-public-ip';
 
 //hi
 
-const HomeScreenMVP = ({ nav, setImage, setPoisonous, setIsLoading }) => {
-  navigation = nav.navigation;
+const HomeScreenMVP = ({ navigation }) => {
+  // navigation = nav.navigation;
 
   let serverURL = "http://localhost:4000/identify";
 
+  const [image, setImage] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+
   publicIP()
   .then(ip => {
-    // ip = "127.0.0.1";
-    ip = "192.168.0.183"; //directly pasted in from server startup output (second ip listed)
+    // ip = "127.0.0.1"; works with this ip for ios simulator
+    ip = "10.0.0.154"; //directly pasted in from server startup output (second ip listed)
     serverURL = "http://" + ip + ":4000/identify";
     console.log(serverURL);
   })
@@ -35,7 +38,12 @@ const HomeScreenMVP = ({ nav, setImage, setPoisonous, setIsLoading }) => {
 
       if (!result.canceled) {
         setImage(result.assets[0].uri);
-        sendImage(result.assets[0].uri);
+        // sendImage(image);
+        // setIsLoading(true); // new
+        navigation.navigate('Results', {
+          image: result.assets[0].uri,
+          serverURL: serverURL,
+        });
       }
     } catch (error) {
       alert("Error uploading image: " + error);
@@ -43,6 +51,7 @@ const HomeScreenMVP = ({ nav, setImage, setPoisonous, setIsLoading }) => {
   }
 
   const selectImage = async () => {
+    console.log("select image triggered");
     try {
       await ImagePicker.requestCameraPermissionsAsync();
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -53,67 +62,77 @@ const HomeScreenMVP = ({ nav, setImage, setPoisonous, setIsLoading }) => {
       });
 
       if (!result.canceled) {
-        console.log(result.assets[0]);
+        console.log("image selected: " + result.assets[0]);
         setImage(result.assets[0].uri);
-        sendImage(result.assets[0].uri);
+        console.log("select image is set as imageuri: " + {image});
+        console.log("other: " + result.assets[0].uri)
+        // sendImage(result.assets[0].uri);
+        // setIsLoading(true); // new
+        navigation.navigate('Results', {
+          image: result.assets[0].uri,
+          serverURL: serverURL,
+        });
+      } else {
+        console.log("cancelled");
       }
     } catch (error) {
       alert("Error uploading image: " + error);
     }
   }
 
-  const sendImage = async (imageURI) => {
-    const image = await fetchImageFromUri(imageURI);
-    console.log(image);
-    var reader = new FileReader();
-    reader.onload = () => {
-        var Data = { image:reader.result, width: reader.result.width, height: reader.result.height };
-        var headers = {"Content-Type": "application/json"}
-        setIsLoading(true); // new
-        fetch(serverURL, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(Data)
-        })
-        .then(doImageResponse)
-        .catch((e) => {console.log(e)});
-    }
-    reader.readAsDataURL(image);
-    // fetch(serverURL,
-    //   {method: "POST",
-    //   body: JSON.stringify({image: image}),
-    //   headers: {"Content-Type": "application/json"}})
-    //   .then(doImageResponse)
-    //   .catch((e) => {console.log(e)});
-  }
+  // cut starting HERE
 
-  const fetchImageFromUri = async (uri) => {
-    const response = await fetch(uri);
-    console.log(response.naturalWidth);
-    const blob = await response.blob();
-    return blob;
-  };
+  // const sendImage = async (imageURI) => {
+  //   const image = await fetchImageFromUri(imageURI);
+  //   console.log(image);
+  //   var reader = new FileReader();
+  //   reader.onload = () => {
+  //       var Data = { image:reader.result, width: reader.result.width, height: reader.result.height };
+  //       var headers = {"Content-Type": "application/json"}
+  //       fetch(serverURL, {
+  //           method: 'POST',
+  //           headers: headers,
+  //           body: JSON.stringify(Data)
+  //       })
+  //       .then(doImageResponse)
+  //       .catch((e) => {console.log(e)});
+  //   }
+  //   reader.readAsDataURL(image);
+  //   // fetch(serverURL,
+  //   //   {method: "POST",
+  //   //   body: JSON.stringify({image: image}),
+  //   //   headers: {"Content-Type": "application/json"}})
+  //   //   .then(doImageResponse)
+  //   //   .catch((e) => {console.log(e)});
+  // }
 
-  const doImageResponse = (res) => {
-    if (res.status !== 200) {
-      console.log(res);
-      return;
-    }
+  // const fetchImageFromUri = async (uri) => {
+  //   const response = await fetch(uri);
+  //   console.log(response.naturalWidth);
+  //   const blob = await response.blob();
+  //   return blob;
+  // };
 
-    res.json()
-      .then(doImageResponseProcessing)
-      .catch((e) => {console.log(e);});
-  }
+  // const doImageResponse = (res) => {
+  //   if (res.status !== 200) {
+  //     console.log(res);
+  //     return;
+  //   }
 
-  const doImageResponseProcessing = (data) => {
-    if (!Array.isArray(data) || data.length === 0) {
-      console.error("bad response from /identify - not proper array")
-      return;
-    }
-    setIsLoading(false);
-    setPoisonous(data[0]);
-    navigation.navigate('Results');
-  }
+  //   res.json()
+  //     .then(doImageResponseProcessing)
+  //     .catch((e) => {console.log(e);});
+  // }
+
+  // const doImageResponseProcessing = (data) => {
+  //   if (!Array.isArray(data) || data.length === 0) {
+  //     console.error("bad response from /identify - not proper array")
+  //     return;
+  //   }
+  //   setIsLoading(false);
+  //   setPoisonous(data[0]);
+  //   navigation.navigate('Results');
+  // }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
