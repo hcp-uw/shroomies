@@ -88,6 +88,7 @@ const Results = ({ navigation, route }) => {
       </View>
     );
   }
+    isPoisonous = poisonous[3]>4*Math.pow(10, -8);
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
         <View style={styles.headingContainer}>
@@ -107,12 +108,12 @@ const Results = ({ navigation, route }) => {
         <View style={styles.infoContainer}>
           <Image
             source={
-              poisonous[3]>2*Math.pow(10, -8) ?
+              isPoisonous ?
               require('../assets/shroomies-x.png') :
               require('../assets/shroomies-check.png')}
             style={styles.resultsImage}
           />
-          <Text style={styles.resultsText}>{poisonous[3]>2*Math.pow(10, -8)? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
+          <Text style={styles.resultsText}>{isPoisonous? <Text>Poisonous</Text> : <Text>Not Poisonous</Text>}</Text>
           <Text style={styles.disclaimer}>
             Disclaimer: This app is developed by students for educational and recreational purposes.
             Users must assume responsibility for actions taken related to mushroom identification, such
