@@ -8,3 +8,4 @@ server/mushroom_models/trainedModel_lite.tflite
 server/src/.venv
 .DS_Store
 .DS_Store
+.DS_Store
