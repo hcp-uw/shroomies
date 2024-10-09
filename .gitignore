@@ -6,3 +6,4 @@ server/mushroom_models/trained_Mushroom_model V2
 server/mushroom_models/trained_Mushroom_model_V3.keras
 server/mushroom_models/trainedModel_lite.tflite
 server/src/.venv
+.DS_Store
