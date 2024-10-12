@@ -27,7 +27,7 @@ def identify():
 
     # output_path = join(current_dir, "./")
 
-    model_path = join(current_dir, "../mushroom_models/trainedModel_lite.tflite")
+    model_path = join(current_dir, "../mushroom_models/trainedModelV2.06_lite_nonTransfer.tflite")
 
     # Load TFLite model and allocate tensors.
     interpreter = tf.lite.Interpreter(model_path=model_path)
