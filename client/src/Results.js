@@ -88,7 +88,9 @@ const Results = ({ navigation, route }) => {
       </View>
     );
   }
-    isPoisonous = poisonous[3]>4*Math.pow(10, -8);
+    // isPoisonous = poisonous[3]>4*Math.pow(10, -8);
+    isPoisonous = poisonous[0] > 0.93;
+    console.log(poisonous);
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#FFF2E9' }}>
         <View style={styles.headingContainer}>

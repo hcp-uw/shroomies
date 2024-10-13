@@ -16,7 +16,7 @@ const HomeScreenMVP = ({ navigation }) => {
   publicIP()
   .then(ip => {
     // ip = "127.0.0.1"; works with this ip for ios simulator
-    ip = "10.19.184.106"; //directly pasted in from server startup output (second ip listed)
+    ip = "10.0.0.194"; //directly pasted in from server startup output (second ip listed)
     serverURL = "http://" + ip + ":4000/identify";
     console.log(serverURL);
   })

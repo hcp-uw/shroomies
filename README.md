@@ -5,10 +5,10 @@ Check out our [Figma design](https://www.figma.com/file/5jvVQx2kV1F6DvpRpBQqyH/F
 
 ## Installation / Usage
 
-### Model Set-Up
+<!-- ### Model Set-Up
 
 [Download the model](https://drive.google.com/drive/u/1/folders/1DM6uPu0wTsioXFdnRzWzRy-jyfy72zsM) and save
-under /server/mushroom_models
+under /server/mushroom_models -->
 
 ### Client Set-Up
 
